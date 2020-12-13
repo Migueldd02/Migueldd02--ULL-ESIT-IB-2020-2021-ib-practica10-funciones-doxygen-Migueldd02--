@@ -4,6 +4,28 @@
 #include <cmath>
 #include <cstring>
 #include "cripto.h"
+
+std::string XOR(std::string opcion_xor,std::string pass){ 
+    std::string texto = opcion_xor;
+    std::string texto_encriptado;
+    std::string clave = pass;
+    int contador = 0;
+    unsigned char letra_xor;
+    for (auto &element: clave){
+        element ^= 128;
+    }
+    for (int i = 0; i < texto.length(); i++){
+        letra_xor = texto[i] ^ clave[contador];
+        texto_encriptado += letra_xor;
+        contador++;
+    }
+    if(contador >= clave.length()){
+    contador = 0;
+    }
+
+    return texto_encriptado;
+}
+
 std::string cesar(std::string texto_a_codificar, char* argv[]){
     std::string palabra = texto_a_codificar;
     int largo = palabra.length();
@@ -34,25 +56,4 @@ std::string cesar(std::string texto_a_codificar, char* argv[]){
         std::cout<<"Debe introducir un "+" o un "-" " << std::endl;
         return 0;
     }
-}
-
-std::string XOR(std::string opcion_xor,std::string pass){ 
-    std::string texto = opcion_xor;
-    std::string texto_encriptado;
-    std::string clave = pass;
-    int contador = 0;
-    unsigned char letra_xor;
-    for (auto &element: clave){
-        element ^= 128;
-    }
-    for (int i = 0; i < texto.length(); i++){
-        letra_xor = texto[i] ^ clave[contador];
-        texto_encriptado += letra_xor;
-        contador++;
-    }
-    if(contador >= clave.length()){
-    contador = 0;
-    }
-
-    return texto_encriptado;
 }
